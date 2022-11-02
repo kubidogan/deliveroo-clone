@@ -32,7 +32,7 @@ const HomeScreen = () => {
         <View>
           <Text className="font-bold text-gray-400 text-xs">Deliver Now!</Text>
           <Text className='font-bold text-xl'>Current Location
-            <UserIcon size={20} color="#00CCBB"/>
+            <ChevronDownIcon size={20} color="#00CCBB"/>
           </Text>
         </View>
       </View>
