@@ -9,6 +9,7 @@ import {
 } from "react-native-heroicons/outline";
 import Categories from '../components/Categories';
 import FeaturedRow from '../components/FeaturedRow';
+import RestaurantCard from '../components/RestaurantCard';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
