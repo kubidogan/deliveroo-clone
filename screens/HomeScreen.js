@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, Image, TextInput, ScrollView } from 'react-native'
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import {
   UserIcon,
@@ -10,14 +10,33 @@ import {
 import Categories from '../components/Categories';
 import FeaturedRow from '../components/FeaturedRow';
 import RestaurantCard from '../components/RestaurantCard';
+import sanityClient from '../sanity';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const [featuredCategories, setFeaturedCategories] = useState([])
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown:  false,
     })
+  }, []);
+
+  useEffect(() => {
+    sanityClient.fetch(
+        `
+          *[_type == "featured"] {
+          ...,
+          restaurants[]->{
+            ...,
+            dishes[]->
+          }
+          }
+        `
+      )
+      .then( data => {
+        setFeaturedCategories(data)
+      });
   }, []);
 
   return (
@@ -64,27 +83,18 @@ const HomeScreen = () => {
           <Categories />
 
           {/* Features Rows */}
-          <FeaturedRow
-            id="123"
-            title='Featured'
-            description='Paid placements for our parents'
-          />
-          {/* Features Rows */}
-          <FeaturedRow
-            id="1234"
-            title="Tasty Discounts"
-            description="Everyones's been loving these juicy discounts"
-          />
-          {/* Features Rows */}
-          <FeaturedRow
-            id="12345"
-            title="Offers near you!"
-            description="Why not support your local restaurants tonight!"
-          />
+          {featuredCategories?.map((category) => (
+            <FeaturedRow
+              key={category._id}
+              id={category._id}
+              title={category.name}
+              description={category.short_description}
+            />
+          ))}
         </ScrollView>
-
     </SafeAreaView>
   )
 }
+
 
 export default HomeScreen

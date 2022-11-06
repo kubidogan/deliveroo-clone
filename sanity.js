@@ -1,5 +1,5 @@
  import sanityClint from "@sanity/client"
- import ImageUrlBuilder  from "@sanity/image-url/lib/types/builder"
+ import ImageUrlBuilder  from "@sanity/image-url"
 
  const client = sanityClint({
   projectId: "d21xq1kx",
