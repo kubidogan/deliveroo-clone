@@ -79,23 +79,14 @@ const HomeScreen = () => {
           <Categories />
 
           {/* Features Rows */}
-          <FeaturedRow
-            id="123"
-            title='Featured'
-            description='Paid placements for our parents'
-          />
-          {/* Features Rows */}
-          <FeaturedRow
-            id="1234"
-            title="Tasty Discounts"
-            description="Everyones's been loving these juicy discounts"
-          />
-          {/* Features Rows */}
-          <FeaturedRow
-            id="12345"
-            title="Offers near you!"
-            description="Why not support your local restaurants tonight!"
-          />
+          {featuredCategories?.map((category) => {
+            <FeaturedRow
+              key={category._id}
+              id={category._id}
+              title={category.name}
+              description={category.short_description}
+            />
+          })}
         </ScrollView>
 
     </SafeAreaView>
