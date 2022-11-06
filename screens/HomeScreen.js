@@ -24,13 +24,17 @@ const HomeScreen = () => {
 
   useEffect(() => {
     sanityClient.fetch(
-      `*[_type == "featured"] {
-        ...,
-        restaurants[]->{
+        `
+          *[_type == "featured"] {
           ...,
-          dishes[]->
-        }
-      }`).then( data => {
+          restaurants[]->{
+            ...,
+            dishes[]->
+          }
+          }
+        `
+      )
+      .then( data => {
         setFeaturedCategories(data)
       });
   }, []);
@@ -79,18 +83,18 @@ const HomeScreen = () => {
           <Categories />
 
           {/* Features Rows */}
-          {featuredCategories?.map((category) => {
+          {featuredCategories?.map((category) => (
             <FeaturedRow
               key={category._id}
               id={category._id}
               title={category.name}
               description={category.short_description}
             />
-          })}
+          ))}
         </ScrollView>
-
     </SafeAreaView>
   )
 }
+
 
 export default HomeScreen
