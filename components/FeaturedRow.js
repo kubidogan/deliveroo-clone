@@ -27,7 +27,6 @@ const FeaturedRow = ({id, title, description}) => {
       setRestaurants(data?.restaurants);
     });
   }, []);
-  console.log(restaurants)
 
   return (
     <View>
