@@ -26,11 +26,11 @@ const RestaurantScreen = () => {
     });
   }, [])
 
-  // return (
-  //   <ScrollView>
-  //     <Text>{title}</Text>
-  //   </ScrollView>
-  // );
+  return (
+    <ScrollView>
+      <Text>{title}</Text>
+    </ScrollView>
+  );
 };
 
 export default RestaurantScreen
