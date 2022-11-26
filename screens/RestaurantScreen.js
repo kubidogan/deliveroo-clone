@@ -7,6 +7,7 @@ import { StarIcon } from "react-native-heroicons/solid";
 import { MapPinIcon } from "react-native-heroicons/outline";
 import { QuestionMarkCircleIcon } from "react-native-heroicons/outline";
 import { ChevronRightIcon } from "react-native-heroicons/outline";
+import DishRow from '../components/DishRow';
 
 
 const RestaurantScreen = () => {
