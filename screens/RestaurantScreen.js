@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, Image } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native';
 
@@ -28,9 +28,16 @@ const RestaurantScreen = () => {
 
   return (
     <ScrollView>
-      <Text>{title}</Text>
+      <View>
+        <Image
+          soruce={{
+            uri: urlFor(imgUrl).url(),
+          }}
+          className="w-full h-56 bg-gray-300 p-4"
+        />
+      </View>
     </ScrollView>
   );
 };
 
-export default RestaurantScreen
+export default RestaurantScreen;
