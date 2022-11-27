@@ -1,17 +1,20 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { urlFor } from '../sanity';
-import { ArrowLeftIcon } from 'react-native-heroicons/solid';
-import { StarIcon } from "react-native-heroicons/solid";
+import { ArrowLeftIcon, StarIcon } from 'react-native-heroicons/solid';
+
 import { MapPinIcon } from "react-native-heroicons/outline";
 import { QuestionMarkCircleIcon } from "react-native-heroicons/outline";
 import { ChevronRightIcon } from "react-native-heroicons/outline";
 import DishRow from '../components/DishRow';
+import BasketIcon from '../components/BasketIcon';
+import { useDispatch } from 'react-redux';
 
 
 const RestaurantScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const {
     params: {
@@ -28,6 +31,23 @@ const RestaurantScreen = () => {
     },
   } =  useRoute();
 
+  useEffect(() => {
+    dispatch(
+      setRestaurant({
+        id,
+        imgUrl,
+        title,
+        rating,
+        genre,
+        address,
+        short_description,
+        dishes,
+        long,
+        lat,
+      })
+    );
+  }, [dispatch])
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown:  false,
@@ -35,6 +55,9 @@ const RestaurantScreen = () => {
   }, [])
 
   return (
+    <>
+    <BasketIcon />
+
     <ScrollView>
       <View className='relative'>
         <Image
@@ -78,7 +101,7 @@ const RestaurantScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <View>
+      <View className="pb-36">
         <Text className="pt-6 px-4 mb-3 font-bold text-xl">Menu</Text>
 
         {/* Dishrows */}
@@ -94,6 +117,7 @@ const RestaurantScreen = () => {
         ))}
       </View>
     </ScrollView>
+    </>
   );
 };
 
