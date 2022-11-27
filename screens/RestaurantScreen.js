@@ -10,6 +10,7 @@ import { ChevronRightIcon } from "react-native-heroicons/outline";
 import DishRow from '../components/DishRow';
 import BasketIcon from '../components/BasketIcon';
 import { useDispatch } from 'react-redux';
+import { setRestaurant } from '../features/restaurantSlice';
 
 
 const RestaurantScreen = () => {
@@ -33,7 +34,7 @@ const RestaurantScreen = () => {
 
   useEffect(() => {
     dispatch(
-      setRestaurant({
+      setRestaurant ({
         id,
         imgUrl,
         title,
